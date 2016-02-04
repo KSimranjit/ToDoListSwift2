@@ -10,6 +10,30 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var itemTextField: UITextField!
+    
+    
+    @IBAction func addItem(sender: AnyObject) {
+        
+        toDoList.append(itemTextField.text!)
+        
+        itemTextField.text = ""
+        
+        NSUserDefaults.standardUserDefaults().setObject(toDoList, forKey: "toDoList")
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    
+    func textFieldShouldReturn(textField : UITextField!) -> Bool {
+        
+        itemTextField.resignFirstResponder()
+        
+        return true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
